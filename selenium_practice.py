@@ -1,7 +1,30 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+import time
 
-driver = webdriver.Chrome() #Error: https://stackoverflow.com/questions/29858752/error-message-chromedriver-executable-needs-to-be-available-in-the-path
-                            #It´s also in Selenium docs (Installation--->Drivers)
-driver.get('https://chess.com')
-assert 'Chess' in driver.title
-print(driver)
+my_username = 'example1'
+my_password = '1234567'
+
+driver = webdriver.Edge() 
+driver.get('https://www.instagram.com')
+assert 'Instagram' in driver.title
+
+driver.maximize_window()
+driver.implicitly_wait(5)
+
+username = driver.find_element(By.NAME, 'username')
+password = driver.find_element(By.NAME, 'password')
+
+username.clear()
+password.clear()
+
+username.send_keys(my_username)
+password.send_keys(my_password)
+
+username.send_keys(Keys.RETURN)
+password.send_keys((Keys.RETURN))
+
+time.sleep(5)
+
+driver.close()
